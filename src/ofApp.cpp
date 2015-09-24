@@ -45,7 +45,7 @@ void ofApp::setup(){
     camera.setup();
     windowShaped=false;
     
-    ofSetWindowTitle("CanonHTTP");
+    ofSetWindowTitle("CanonHTTP v"+string(VERSION));
     
     font.loadFont("fonts/OpenSans-Bold.ttf", 48);
     
@@ -104,14 +104,21 @@ void ofApp::draw(){
     }
     
     if(camera.isLiveDataReady()) {
-        ofSetColor(ofColor::red);
+        
         stringstream status;
         status << camera.getWidth() << "x" << camera.getHeight() << " @ " <<
         (int) ofGetFrameRate() << " app-fps / " <<
         (int) camera.getFrameRate() << " cam-fps / " <<
         (camera.getBandwidth() / (1<<20)) << " MiB/s" << endl;
         status << basename();
-        ofDrawBitmapString(status.str(), 10, 20);
+        ofDrawBitmapStringHighlight(status.str(), 10, 20);
+    }
+    
+    ofSetColor(ofColor::white);
+    int y = 70;
+    for(int i = 0; i<messages.size(); i++) {
+        ofDrawBitmapString(messages[i], 10, y);
+        y += 14;
     }
 }
 
@@ -152,7 +159,11 @@ void ofApp::windowResized(int w, int h){
 
 //--------------------------------------------------------------
 void ofApp::gotMessage(ofMessage msg){
-
+    string message = ofGetTimestampString()+" "+msg.message;
+    messages.push_back(message);
+    if(messages.size() > 30) {
+        messages.erase(messages.begin());
+    }
 }
 
 //--------------------------------------------------------------

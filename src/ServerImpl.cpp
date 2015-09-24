@@ -18,6 +18,8 @@ void CanonRequestHandler::handleRequest(HTTPServerRequest &req, HTTPServerRespon
     HTTPResponse::HTTPStatus code;
     string response;
     
+    ofSendMessage(req.getURI());
+    
     Poco::URI uri( req.getURI() );
     ofLogNotice("CanonRequestHandler") << uri.getPath();
     
