@@ -43,6 +43,7 @@ void ofApp::setup(){
     ofSetLogLevel("ofThread", OF_LOG_ERROR);
     
     camera.setup();
+    nextConnectAttempt = ofGetElapsedTimef();
     windowShaped=false;
     
     ofSetWindowTitle("CanonHTTP v"+string(VERSION));
@@ -66,11 +67,17 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    float now = ofGetElapsedTimef();
+    
     stringstream basename;
     basename << station << "-" << ofEpochTime();
     path.setFileName(basename.str());
     
-    camera.update();
+    if(!camera.isConnected() && now>nextConnectAttempt) {
+
+        nextConnectAttempt = now + 5;
+    } else
+        camera.update();
     
     if(!windowShaped && camera.isLiveDataReady()) {
         ofSetWindowShape(camera.getWidth(), camera.getHeight());
@@ -87,23 +94,11 @@ void ofApp::drawCentered(string s, int y) {
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    if(camera.isConnected()) {
-        ofSetColor(ofColor::white);
-        camera.draw(0, 0);
-        
-        if(camera.isRecordingMovie()) {
-            if( ofGetElapsedTimeMillis() % 1000 > 500  ) {
-                ofSetColor(ofColor::red);
-                ofCircle(ofGetWidth()-120, 120, 40);
-            }
-        }
-        
-    } else {
-        ofSetColor(ofColor::red);
-        drawCentered("Camera Not Attached", ofGetHeight()*0.5);
-    }
     
     if(camera.isLiveDataReady()) {
+        
+        ofSetColor(ofColor::white);
+        camera.draw(0, 0);
         
         stringstream status;
         status << camera.getWidth() << "x" << camera.getHeight() << " @ " <<
@@ -112,6 +107,16 @@ void ofApp::draw(){
         (camera.getBandwidth() / (1<<20)) << " MiB/s" << endl;
         status << basename();
         ofDrawBitmapStringHighlight(status.str(), 10, 20);
+    }
+    
+    if(camera.isConnected()) {
+        if(camera.isRecordingMovie() && ofGetElapsedTimeMillis() % 1000 > 500) {
+            ofSetColor(ofColor::red);
+            ofCircle(ofGetWidth()-30, 30, 20);
+        }
+    } else {
+        ofSetColor(ofColor::red);
+        drawCentered("Camera Not Attached", ofGetHeight()*0.5);
     }
     
     ofSetColor(ofColor::white);
@@ -129,7 +134,14 @@ void ofApp::keyPressed(int key){
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-
+    if(key=='s') {
+        ofLogNotice() << "Attemping to connect to camera";
+        camera.setup();
+    }
+    if(key=='c') {
+        ofLogNotice() << "Closing camera";
+        camera.close();
+    }
 }
 
 //--------------------------------------------------------------

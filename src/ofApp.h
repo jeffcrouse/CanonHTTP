@@ -5,7 +5,7 @@
 #include "ServerImpl.h"
 
 #define PORT 8675
-#define VERSION "0.2"
+#define VERSION "0.3"
 
 class ofApp : public ofBaseApp{
 
@@ -36,6 +36,7 @@ class ofApp : public ofBaseApp{
         bool windowShaped;
         ofxEdsdk::Camera camera;
         Poco::Net::HTTPServer* s;
+        float nextConnectAttempt;
     
         vector<string> messages;
 };
