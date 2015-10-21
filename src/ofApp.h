@@ -5,7 +5,7 @@
 #include "ServerImpl.h"
 
 #define PORT 8675
-#define VERSION "0.3"
+#define VERSION "0.4"
 
 class ofApp : public ofBaseApp{
 

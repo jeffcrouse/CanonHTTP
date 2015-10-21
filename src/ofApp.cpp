@@ -42,7 +42,7 @@ void ofApp::setup(){
     ofSetEscapeQuitsApp(false);
     ofSetLogLevel("ofThread", OF_LOG_ERROR);
     
-    camera.setup();
+    
     nextConnectAttempt = ofGetElapsedTimef();
     windowShaped=false;
     
@@ -63,6 +63,7 @@ void ofApp::setup(){
     s = new Poco::Net::HTTPServer(factory, ServerSocket(PORT), new HTTPServerParams);
     s->start();
 
+    
 }
 
 //--------------------------------------------------------------
@@ -74,7 +75,7 @@ void ofApp::update(){
     path.setFileName(basename.str());
     
     if(!camera.isConnected() && now>nextConnectAttempt) {
-
+        camera.setup();
         nextConnectAttempt = now + 5;
     } else
         camera.update();
