@@ -3,9 +3,10 @@
 #include "ofMain.h"
 #include "ofxEdsdk.h"
 #include "ServerImpl.h"
+#include "Poco/Path.h"
 
 #define PORT 8675
-#define VERSION "0.4"
+#define VERSION "0.5"
 
 class ofApp : public ofBaseApp{
 

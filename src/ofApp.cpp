@@ -48,7 +48,7 @@ void ofApp::setup(){
     
     ofSetWindowTitle("CanonHTTP v"+string(VERSION));
     
-    font.loadFont("fonts/OpenSans-Bold.ttf", 48);
+    font.load("fonts/OpenSans-Bold.ttf", 48);
     
     string hostname = Poco::Net::DNS::hostName();
     station = hostname.substr(0, hostname.find('.'));
@@ -62,8 +62,6 @@ void ofApp::setup(){
     CanonRequestHandlerFactory* factory = new CanonRequestHandlerFactory();
     s = new Poco::Net::HTTPServer(factory, ServerSocket(PORT), new HTTPServerParams);
     s->start();
-
-    
 }
 
 //--------------------------------------------------------------
@@ -113,7 +111,7 @@ void ofApp::draw(){
     if(camera.isConnected()) {
         if(camera.isRecordingMovie() && ofGetElapsedTimeMillis() % 1000 > 500) {
             ofSetColor(ofColor::red);
-            ofCircle(ofGetWidth()-30, 30, 20);
+            ofDrawCircle(ofGetWidth()-30, 30, 20);
         }
     } else {
         ofSetColor(ofColor::red);

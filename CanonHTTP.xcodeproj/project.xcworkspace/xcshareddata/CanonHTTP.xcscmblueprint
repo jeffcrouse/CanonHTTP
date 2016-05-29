@@ -7,7 +7,7 @@
     "0747A1C4019491CA3AEE28E27C669A000C270B6D" : 0,
     "36985836DF35EF8F5D7D4E20C1E7B9D301114BDF" : 0
   },
-  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "E978950F-2853-4AF8-A956-07FFEDF16527",
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "BA5A7CDE-0C60-41AF-899A-2B76A299C586",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "0747A1C4019491CA3AEE28E27C669A000C270B6D" : "CanonHTTP\/",
     "36985836DF35EF8F5D7D4E20C1E7B9D301114BDF" : "..\/..\/addons\/ofxEdsdk"
@@ -22,7 +22,7 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0747A1C4019491CA3AEE28E27C669A000C270B6D"
     },
     {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jefftimesten\/ofxEdsdk.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/seethroughlab\/ofxEdsdk.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "36985836DF35EF8F5D7D4E20C1E7B9D301114BDF"
     }
