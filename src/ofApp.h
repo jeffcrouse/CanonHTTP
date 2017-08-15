@@ -6,7 +6,7 @@
 #include "Poco/Path.h"
 
 #define PORT 8675
-#define VERSION "0.5"
+#define VERSION "0.6"
 
 class ofApp : public ofBaseApp{
 
